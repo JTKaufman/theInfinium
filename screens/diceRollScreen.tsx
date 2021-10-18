@@ -19,20 +19,29 @@ export default function diceRollScreen({ navigation }: RootTabScreenProps<'DiceR
 
   //@ts-ignore
   const rollResultTotals = (rollResults) => {
-    //@ts-ignore
-    setSuccessFailure(successFailure + rollResults.filter(x => x === 'Success'))
-    //@ts-ignore
-    setSuccessFailure(successFailure - rollResults.filter(x => x === 'Failure'))
 
-    //@ts-ignore
-    setAdvantageDisadvantage(advantageDisadvantage + rollResults.filter(x => x === 'Advantage'))
-    //@ts-ignore
-    setAdvantageDisadvantage(advantageDisadvantage + rollResults.filter(x => x === 'Disadvantage'))
-
-    //@ts-ignore
-    setTriumphDespair(triumphDespair + rollResults.filter(x => x === 'Triumph'))
-    //@ts-ignore
-    setTriumphDespair(triumphDespair + rollResults.filter(x => x === 'Despair'))
+    rollResults.forEach(n => {
+      switch(n) {
+        case 'Success':
+          setSuccessFailure(successFailure + 1)
+          break;
+        case 'Failure':
+          setSuccessFailure(successFailure - 1)
+          break;
+        case 'Advantage':
+          setAdvantageDisadvantage(advantageDisadvantage + 1)
+          break;
+        case 'Disadvantage':
+          setAdvantageDisadvantage(advantageDisadvantage - 1)
+          break;
+        case 'Triumph':
+          setTriumphDespair(triumphDespair + 1)
+          break;
+        case 'Despair':
+          setTriumphDespair(triumphDespair - 1)
+          break;
+      }
+    }) 
   }
 
   /**
@@ -40,7 +49,7 @@ export default function diceRollScreen({ navigation }: RootTabScreenProps<'DiceR
    * @param - uses the scores to determine the number of rolls
    */
   function getDiceRollResults() {
-    console.log('hello')
+    clearPreviousResults()
     const abilityRolls = Number(abilityScore) - Number(proficiencyScore)
     const difficultyRolls = Number(difficultyScore) - Number(challengeScore)
 
@@ -49,6 +58,12 @@ export default function diceRollScreen({ navigation }: RootTabScreenProps<'DiceR
     rollResultTotals(difficultyRoll(difficultyRolls))
     rollResultTotals(challengeRoll(Number(challengeScore)))
     
+  }
+
+  function clearPreviousResults() {
+    setSuccessFailure(0)
+    setAdvantageDisadvantage(0)
+    setTriumphDespair(0)
   }
 
   return (
