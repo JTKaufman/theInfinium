@@ -19,7 +19,7 @@ export default function diceRollScreen({ navigation }: RootTabScreenProps<'DiceR
 
   //@ts-ignore
   const rollResultTotals = (rollResults) => {
-
+    //@ts-ignore
     rollResults.forEach(n => {
       switch(n) {
         case 'Success':

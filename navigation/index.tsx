@@ -69,6 +69,14 @@ function BottomTabNavigator() {
         options={({ navigation }: RootTabScreenProps<'DiceRoller'>) => ({
           title: 'Dice Roller',
           tabBarIcon: ({ color }) => <TabBarIcon name="dice-d20" color={color} />,
+        })}
+      />
+      <BottomTab.Screen
+        name="TabTwo"
+        component={TabTwoScreen}
+        options={({ navigation }: RootTabScreenProps<'TabTwo'>) => ({
+          title: 'Tab Two',
+          tabBarIcon: ({ color }) => <TabBarIcon name="dice-d20" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate('Modal')}
@@ -84,14 +92,6 @@ function BottomTabNavigator() {
             </Pressable>
           ),
         })}
-      />
-      <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
-        options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="dice-d20" color={color} />,
-        }}
       />
     </BottomTab.Navigator>
   );
