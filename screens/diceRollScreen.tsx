@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { View, TouchableWithoutFeedback, ImageBackground, StyleSheet, Keyboard, TouchableOpacity } from 'react-native';
-import { TextInput, TouchableHighlight } from 'react-native-gesture-handler';
+import { TextInput} from 'react-native-gesture-handler';
 import { Text} from '../components/Themed';
 import { RootTabScreenProps } from '../types';
 import { abilityRoll, challengeRoll, difficultyRoll, proficiencyRoll } from '../Utils/Utils';
@@ -50,8 +50,12 @@ export default function diceRollScreen({ navigation }: RootTabScreenProps<'DiceR
    */
   function getDiceRollResults() {
     clearPreviousResults()
+    console.log(`ability score: ${abilityScore}`)
+    console.log(`ability score: ${proficiencyScore}`)
     const abilityRolls = Number(abilityScore) - Number(proficiencyScore)
     const difficultyRolls = Number(difficultyScore) - Number(challengeScore)
+
+    console.log(abilityRolls)
 
     rollResultTotals(abilityRoll(abilityRolls))
     rollResultTotals(proficiencyRoll(Number(proficiencyScore)))
@@ -72,19 +76,19 @@ export default function diceRollScreen({ navigation }: RootTabScreenProps<'DiceR
         <ImageBackground source={BackgroundImage} style={styles.image}>
           <View style={styles.row}>
             <Text style={styles.inputLabel}>Ability Score</Text>
-            <TextInput style={styles.diceInput} keyboardType='numeric' defaultValue={abilityScore} />
+            <TextInput style={styles.diceInput} keyboardType='numeric' defaultValue={abilityScore} onChangeText={text => setAbilityScore(text)}/>
           </View>
           <View style={styles.row}>
             <Text style={styles.inputLabel}>Proficiency Score</Text>
-            <TextInput style={styles.diceInput} keyboardType='numeric' defaultValue={abilityScore} />
+            <TextInput style={styles.diceInput} keyboardType='numeric' defaultValue={proficiencyScore} onChangeText={text => setProficiencyScore(text)}/>
           </View>
           <View style={styles.row}>
             <Text style={styles.inputLabel}>Difficulty Rating</Text>
-            <TextInput style={styles.diceInput} keyboardType='numeric' defaultValue={abilityScore} />
+            <TextInput style={styles.diceInput} keyboardType='numeric' defaultValue={difficultyScore} onChangeText={text => setDifficultyScore(text)}/>
           </View>
           <View style={styles.row}>
             <Text style={styles.inputLabel}>Challenge Rating</Text>
-            <TextInput style={styles.diceInput} keyboardType='numeric' defaultValue={abilityScore} />
+            <TextInput style={styles.diceInput} keyboardType='numeric' defaultValue={challengeScore} onChangeText={text => setChallengeScore(text)}/>
           </View>
           <View style={styles.results}>
             <Text style={styles.resultText}>

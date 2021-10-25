@@ -30,11 +30,11 @@ const difficultyDiceSides = [
     '',
     'Failure',
     'Failure, Failure',
-    'Threat',
-    'Threat',
-    'Threat',
-    'Threat,Threat',
-    'Failure,Threat'
+    'Disadvantage',
+    'Disadvantage',
+    'Disadvantage',
+    'Disadvantage,Disadvantage',
+    'Failure,Disadvantage'
 ]
 
 const challengeDiceSides = [
@@ -43,34 +43,36 @@ const challengeDiceSides = [
     'Failure',
     'Failure,Failure',
     'Failure,Failure',
-    'Threat',
-    'Threat',
-    'Failure,Threat',
-    'Failure,Threat',
-    'Threat,Threat',
-    'Threat,Threat',
+    'Disadvantage',
+    'Disadvantage',
+    'Failure,Disadvantage',
+    'Failure,Disadvantage',
+    'Disadvantage,Disadvantage',
+    'Disadvantage,Disadvantage',
     'Despair'
 ]
 
 export const abilityRoll = (numberOfRolls: number) => {
-    const rolls = []
+    var rolls = Array.from({length: numberOfRolls}, () => Math.floor(Math.random() * 8))
 
-    for (var i = 0; i < numberOfRolls; i++) {
-        rolls.push(Math.floor(Math.random() * 8));
-    }
+    // for (var i = 0; i < numberOfRolls; i++) {
+    //     rolls[i].push((Math.floor(Math.random() * 8)))
+    // }
 
+    console.log(rolls)
     var rollResults = rolls.map(x => abilityDiceSides[x])
     const resultsString = rollResults.join(',')
     const abilityResults = resultsString.split(',')
 
+    console.log(abilityResults)
     return abilityResults
 }
 
 export const proficiencyRoll = (numberOfRolls: number) => {
-    const rolls = []
+    const rolls = Array(numberOfRolls)
 
     for (var i = 0; i < numberOfRolls; i++) {
-        rolls.push(Math.floor(Math.random() * 12));
+        rolls[i] = (Math.floor(Math.random() * 12));
     }
 
     var rollResults = rolls.map(x => proficiencyDiceSides[x])
@@ -81,7 +83,7 @@ export const proficiencyRoll = (numberOfRolls: number) => {
 }
 
 export const difficultyRoll = (numberOfRolls: number) => {
-    const rolls = []
+    const rolls = Array(numberOfRolls)
 
     for (var i = 0; i < numberOfRolls; i++) {
         rolls.push(Math.floor(Math.random() * 8));
@@ -95,7 +97,7 @@ export const difficultyRoll = (numberOfRolls: number) => {
 }
 
 export const challengeRoll = (numberOfRolls: number) => {
-    const rolls = []
+    const rolls = Array(numberOfRolls)
 
     for (var i = 0; i < numberOfRolls; i++) {
         rolls.push(Math.floor(Math.random() * 12));
